@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Android &#8211; Saleh Mohammad</title>
+	<atom:link href="https://saleh9582.github.io/saleh/portfolio_skills/android/feed/" rel="self" type="application/rss+xml" />
+	<link>https://saleh9582.github.io/saleh</link>
+	<description></description>
+	<lastBuildDate>Mon, 27 Jul 2020 14:10:20 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+
+<image>
+	<url>https://saleh9582.github.io/saleh/wp-content/uploads/2020/07/cropped-SM-LOGO-Copy-32x32.jpg</url>
+	<title>Android &#8211; Saleh Mohammad</title>
+	<link>https://saleh9582.github.io/saleh</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Prayojan BD</title>
+		<link>https://saleh9582.github.io/saleh/portfolio-items/prayojanbd/</link>
+					<comments>https://saleh9582.github.io/saleh/portfolio-items/prayojanbd/#respond</comments>
+		
+		<dc:creator><![CDATA[saleh]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 04:43:41 +0000</pubDate>
+				<guid isPermaLink="false">https://saleh9582.github.io/saleh/?post_type=avada_portfolio&#038;p=208</guid>
+
+					<description><![CDATA[Prayojan BD is a online delivery service apps. They Provide online laundry service, online medicine delivery service, online grocery delivery in Chittagong area. They are startup company.]]></description>
+										<content:encoded><![CDATA[<p>Prayojan BD is a online delivery service apps. They Provide online laundry service, online medicine delivery service, online grocery delivery in Chittagong area. They are startup company.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://saleh9582.github.io/saleh/portfolio-items/prayojanbd/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Vix Cuts</title>
+		<link>https://saleh9582.github.io/saleh/portfolio-items/vixcuts/</link>
+					<comments>https://saleh9582.github.io/saleh/portfolio-items/vixcuts/#respond</comments>
+		
+		<dc:creator><![CDATA[saleh]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 04:42:58 +0000</pubDate>
+				<guid isPermaLink="false">https://saleh9582.github.io/saleh/?post_type=avada_portfolio&#038;p=206</guid>
+
+					<description><![CDATA[Vix Cuts is online barber shop based on Milton Keynes , England.  I developed their online booking system website and IOS Android both apps.]]></description>
+										<content:encoded><![CDATA[<p>Vix Cuts is online barber shop based on Milton Keynes , England.  I developed their online booking system website and IOS Android both apps.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://saleh9582.github.io/saleh/portfolio-items/vixcuts/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
