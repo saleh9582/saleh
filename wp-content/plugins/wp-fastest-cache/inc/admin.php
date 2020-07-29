@@ -2104,6 +2104,7 @@
 				    </div>
 
 				    <?php include_once(WPFC_MAIN_PATH."templates/permission_error.html"); ?>
+				    <?php include_once(WPFC_MAIN_PATH."templates/toolbar_settings.php"); ?>
 
 				    <?php
 				    	if(isset($this->options->wpFastestCacheStatus)){

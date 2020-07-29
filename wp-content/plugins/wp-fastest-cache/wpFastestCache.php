@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.9.0.8
+Version: 0.9.0.9
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -101,6 +101,9 @@ GNU General Public License for more details.
 			add_action('wp_ajax_wpfc_delete_current_page_cache', array($this, "delete_current_page_cache"));
 
 			add_action('wp_ajax_wpfc_clear_cache_of_allsites', array($this, "wpfc_clear_cache_of_allsites_callback"));
+
+			add_action('wp_ajax_wpfc_toolbar_save_settings', array($this, "wpfc_toolbar_save_settings_callback"));
+			add_action('wp_ajax_wpfc_toolbar_get_settings', array($this, "wpfc_toolbar_get_settings_callback"));
 
 
 			add_action( 'wp_ajax_wpfc_save_timeout_pages', array($this, 'wpfc_save_timeout_pages_callback'));
@@ -671,16 +674,14 @@ GNU General Public License for more details.
 				$user = wp_get_current_user();
 				$allowed_roles = array('administrator');
 
-				$constants = get_defined_constants();
-				if(is_array($constants)){
-					foreach ($constants as $key => $value) {
-						if(preg_match("/^WPFC_TOOLBAR_FOR_(.+)/", $key, $role)){
-							if($value){
-								array_push($allowed_roles, strtolower($role[1]));
-							}
-						}
+				$wpfc_role_status = get_option("WpFastestCacheToolbarSettings");
+				if(is_array($wpfc_role_status) && !empty($wpfc_role_status)){
+					foreach ($wpfc_role_status as $key => $value){
+						$key = str_replace("wpfc_toolbar_", "", $key);
+						array_push($allowed_roles, strtolower($key));
 					}
 				}
+
 				
 				if(array_intersect($allowed_roles, $user->roles)){
 					include_once plugin_dir_path(__FILE__)."inc/admin-toolbar.php";
@@ -694,7 +695,6 @@ GNU General Public License for more details.
 					$toolbar = new WpFastestCacheAdminToolbar($is_multi);
 					$toolbar->add();
 				}
-
 			}
 		}
 
@@ -733,6 +733,49 @@ GNU General Public License for more details.
 
 		public function deleteCssAndJsCacheToolbar(){
 			$this->deleteCache(true);
+		}
+
+		public function wpfc_toolbar_get_settings_callback(){
+			if(current_user_can('manage_options')){
+				$result = array("success" => true, "roles" => false);
+
+				$wpfc_role_status = get_option("WpFastestCacheToolbarSettings");
+				if(is_array($wpfc_role_status) && !empty($wpfc_role_status)){
+					$result["roles"] = $wpfc_role_status;
+				}
+
+				die(json_encode($result));
+			}else{
+				wp_die("Must be admin");
+			}
+		}
+
+		public function wpfc_toolbar_save_settings_callback(){
+			if(current_user_can('manage_options')){
+				if(is_array($_GET["roles"]) && !empty($_GET["roles"])){
+					$roles_arr = array();
+
+					foreach($_GET["roles"] as $key => $value){
+						$value = esc_html(esc_sql($value));
+						$key = esc_html(esc_sql($key));
+
+						$roles_arr[$key] = $value;
+					}
+
+					if(get_option("WpFastestCacheToolbarSettings") === false){
+						add_option("WpFastestCacheToolbarSettings", $roles_arr, 1, "no");
+					}else{
+						update_option("WpFastestCacheToolbarSettings", $roles_arr);
+					}
+				}else{
+					delete_option("WpFastestCacheToolbarSettings");
+				}
+
+
+				die(json_encode(array("Saved","success")));
+			}else{
+				wp_die("Must be admin");
+			}
 		}
 
 		public function wpfc_clear_cache_of_allsites_callback(){
@@ -1906,7 +1949,7 @@ GNU General Public License for more details.
 						// 	$matches[0] = preg_replace("/(quot\;|\s)(https?\:)?(\\\\\/\\\\\/|\/\/)(www\.)?".$cdn->originurl."/i", "$1$2$3$4".$cdnurl, $matches[0]);
 						// }
 
-						$matches[0] = preg_replace("/(quot\;|\s)(https?\:)?(\\\\\/\\\\\/|\/\/)(www\.)?".$cdn->originurl."/i", "$1$2$3".$cdnurl, $matches[0]);
+						$matches[0] = preg_replace("/(quot\;|\s)(https?\:)?(\\\\\/\\\\\/|\/\/)(www\.)?".$cdn->originurl."/i", '${1}${2}${3}'.$cdnurl, $matches[0]);
 
 						
 					}else if(preg_match("/\{\"concatemoji\"\:\"[^\"]+\"\}/i", $matches[0])){
